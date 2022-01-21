@@ -9,6 +9,7 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import CardForm from './components/CardForm';
 import CardList from './components/CardList';
+import CardDetails from './components/CardDetails';
 
 function App() {
 
@@ -39,14 +40,19 @@ function App() {
     <>
     <Router>
       <Header />
-      <Route path="/" exact >
-        <CardList contacts={contacts} deleteContact={deleteContact} />
-      </Route>
-      <Route path="/add" >
-        <div className='main container rounded-3 p-5 shadow-sm'>
-          <CardForm addContacts={addContacts} />
-        </div>
-      </Route>
+      <Switch>
+        <Route path="/" exact >
+          <CardList contacts={contacts} deleteContact={deleteContact} />
+        </Route>
+        <Route path="/add" >
+          <div className='main container rounded-3 p-5 shadow-sm'>
+            <CardForm addContacts={addContacts} />
+          </div>
+        </Route>
+        <Route path="/contact/:id">
+          <CardDetails />
+        </Route>
+      </Switch>
     </Router>
       
     </>

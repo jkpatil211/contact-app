@@ -1,9 +1,12 @@
 import { useRef } from "react";
+import { useHistory } from "react-router-dom";
 
 const CardForm = (props) => {
 
     const inputEmail = useRef(null);
     const inputName = useRef(null);
+
+    let history = useHistory();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,7 +17,7 @@ const CardForm = (props) => {
             props.addContacts(data);
             inputName.current.value = "";
             inputEmail.current.value = "";
-            inputName.current.focus();
+            history.push('/');
         }
     }
 
