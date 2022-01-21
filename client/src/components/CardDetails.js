@@ -20,8 +20,8 @@ const CardDetails = (props) => {
        
         <div className="row p-3">
             {contact &&
-            <div className="col-lg-6 card shadow-sm p-3 rounded-3 col-md-9 col-sm-9 col-xs-9 mx-auto d-block" >
-                <img src={userFemale} style={{width: '15rem'}} className="card-img-top image-fluid" />
+            <div className="col-7 card shadow-sm p-3 rounded-3 mx-auto d-block" >
+                <img src={userFemale} className="card-img-top image-fluid" />
                 <div className="card-body">
                     <h4 className="card-title">{contact.name}</h4>
                     <p className="card-text">{contact.email}</p>

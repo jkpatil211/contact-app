@@ -22,7 +22,11 @@ const CardForm = (props) => {
     }
 
     const validate = () => {
-        return true;
+        if(inputName.current.value && inputEmail.current.value) {
+            return true;
+        }
+        alert('All fields are mandatory')
+        return false;
     }
 
     return (
