@@ -3,6 +3,8 @@ import userFemale from '../images/userFemale.png';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import axios from 'axios';
+
 const CardDetails = (props) => {
 
     const CONTACTS_KEY = 'contacts';
@@ -12,7 +14,6 @@ const CardDetails = (props) => {
     useEffect(() => {
         let contacts = JSON.parse(localStorage.getItem(CONTACTS_KEY));
         let contactData = contacts.find(con => con.id === urlParams.id)
-        console.log('newcontact-->', contactData)
         if(contactData) setContact(contactData);
     },[urlParams]);
 

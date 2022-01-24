@@ -5,35 +5,55 @@ import './components/components.css';
 
 import {v4 as uuid} from 'uuid';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import api from '../src/api';
 
 import Header from './components/Header';
 import CardForm from './components/CardForm';
 import CardList from './components/CardList';
 import CardDetails from './components/CardDetails';
 
+
+
 function App() {
 
   const CONTACTS_KEY = 'contacts';
-  const [contacts, setContactList] = useState([]); 
+  const [contacts, setContactList] = useState([]);
+  const [cardListError, setCardListError] = useState(null);
 
-  const addContacts = (data) => {
-    let newData = { id: uuid(), ...data}
-    setContactList([newData, ...contacts]);
+  const getContacts = async () => {
+    try {
+      const res = await api.get('/contacts');
+      return res.data;
+    } catch (error) {
+      setCardListError(error);
+    }
+  }
+
+  const addContacts = async (data) => {
+    let newContact = { id: uuid(), ...data}
+    const response = await api.post('/contacts', newContact);
+    if(response.status === 201) {
+      setContactList([response.data, ...contacts]);
+    }
   }
 
   useEffect(() => {
-    let contactsData = JSON.parse(localStorage.getItem(CONTACTS_KEY));
-    // console.log('Conatctdata-->', contactsData);
-    setContactList(contactsData);
+    const retrieveContacts = async () => {
+      const response = await getContacts();
+      setContactList(response);
+    }
+    retrieveContacts();
   }, [])
 
   useEffect(() => {
-    localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts))
+    // localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts))
   }, [contacts])
 
-  const deleteContact = (id) => {
-    let newContacts = contacts.filter(contact => contact.id != id);
-    setContactList(newContacts);
+  const deleteContact = async (id) => {
+    const response = await api.delete(`/contacts/${id}`);
+    if(response.status === 200) {
+      setContactList(contacts.filter(contact => contact.id != id))
+    }
   }
 
   return (
@@ -42,7 +62,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact >
-          <CardList contacts={contacts} deleteContact={deleteContact} />
+          <CardList error={cardListError} contacts={contacts} deleteContact={deleteContact} />
         </Route>
         <Route path="/add" >
           <div className='main container rounded-3 p-5 shadow-sm'>

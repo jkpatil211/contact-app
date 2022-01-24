@@ -1,3 +1,19 @@
 {
-    "contacts": []
+  "contacts": [
+    {
+      "id": "c11fc7c5-25ee-41e4-9ad3-be9c068c3923",
+      "name": "Jay",
+      "email": "jkpatil@gmail.com"
+    },
+    {
+      "id": "fbc25da9-41d1-42f9-bf37-4b31b7c34c93",
+      "name": "shriman",
+      "email": "shriman@gmail.com"
+    },
+    {
+      "id": "bb4def22-6e5a-44de-b087-3468b084fbef",
+      "name": "Dimpi",
+      "email": "dimpi@gmail.com"
+    }
+  ]
 }
