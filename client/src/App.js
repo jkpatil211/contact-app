@@ -5,7 +5,7 @@ import './components/components.css';
 
 import {v4 as uuid} from 'uuid';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import api from '../src/api';
+import api from './api';
 
 import Header from './components/Header';
 import CardForm from './components/CardForm';
@@ -32,6 +32,7 @@ function App() {
   const addContacts = async (data) => {
     let newContact = { id: uuid(), ...data}
     const response = await api.post('/contacts', newContact);
+    console.log('now there is respnse')
     if(response.status === 201) {
       setContactList([response.data, ...contacts]);
     }
