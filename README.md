@@ -1,6 +1,6 @@
 ## Contact App
 
-I created this while learning React. Thinks I learned here:
+I created this while learning React. Things I learned here:
 
 1. React basic routing
 2. Bootstrap Grid
